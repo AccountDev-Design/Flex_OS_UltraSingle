@@ -36,7 +36,8 @@ x = map(p.x, TS_LEFT, TS_RT, 0, 320);
 y = map(p.y, TS_TOP, TS_BOT, 0, 480);
 ```
 
-Estos valores viven en `fos_config.h` y no deben modificarse.
+Estos valores viven en la sección `FOS_CONFIG` del archivo
+`FlexOS_UltraSingle.ino` y no deben modificarse.
 
 ---
 
@@ -52,8 +53,8 @@ Estos valores viven en `fos_config.h` y no deben modificarse.
 ### Consumo actual
 
 ```
-Flash :  66,5 KB de 256 KB   (25 %)
-SRAM  :   2,0 KB de   8 KB   (25 %)
+Flash : 62.952 bytes de 253.952 bytes   (24 %)
+SRAM  :  1.349 bytes de   8.192 bytes   (16 %)
 ```
 
 Queda margen de sobra para seguir creciendo.
@@ -83,27 +84,17 @@ y asistente de idioma en el primer arranque.
 
 ---
 
-## 🧱 Arquitectura
+## 🧱 Archivo único
 
 ```
 FlexOS_UltraSingle/
-├── FlexOS_UltraSingle.ino   setup / loop
-├── fos_config.h             hardware, geometría, constantes
-├── fos_theme.h              paleta heredada de Flex OS Ultra
-├── fos_gfx.*                motor gráfico directo sobre la GRAM
-├── fos_touch.*              táctil resistivo y gestos
-├── fos_str.*                textos en PROGMEM (español / inglés)
-├── fos_time.*               reloj interno sin RTC
-├── fos_store.*              persistencia en EEPROM
-├── fos_icons.*              iconos vectoriales
-├── fos_ui.*                 barras, filas, teclados, avisos
-├── fos_fx.*                 transiciones
-├── fos_home.*               escritorio y panel rápido
-├── fos_lock.*               bloqueo y PIN
-├── fos_shell.*              arranque, OOBE y bucle principal
-├── fos_apps.*               registro de aplicaciones
-└── app_*.cpp                las doce aplicaciones
+└── FlexOS_UltraSingle.ino   sistema completo, aplicaciones, setup y loop
 ```
+
+El proyecto está unificado en un solo `.ino`. Dentro del archivo se conservan
+secciones claramente rotuladas (`FOS_CONFIG`, `FOS_GFX`, `FOS_TOUCH`,
+`FOS_APPS`, etc.) para que siga siendo fácil localizar cada subsistema sin
+depender de archivos `.cpp` o `.h` adicionales.
 
 ### Decisiones de diseño
 
